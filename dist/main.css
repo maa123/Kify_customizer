@@ -79,3 +79,7 @@ ul {
 .right {
     float: right;
 }
+
+#usage_link {
+    padding-left: 1em;
+}
