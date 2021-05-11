@@ -8,6 +8,7 @@
 ## はじめに
 
 ダウンロード版棋譜読みちゃんのKifyフォルダ内のindex.html(以下単にkify/index.htmlと表記)を書き換える事で選択肢を編集、追加するツールとなります。
+
 ![image](https://user-images.githubusercontent.com/13916338/117845727-c6de0680-b2bb-11eb-8e56-3e6d769fe513.png)
 
 
