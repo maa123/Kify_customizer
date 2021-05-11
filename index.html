@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>棋譜読みちゃんのオプション編集</title>
+    <link rel="stylesheet" href="dist/mvp.css">
+    <link rel="stylesheet" href="dist/main.css">
+</head>
+<body>
+<main>
+    <label id="file_label">
+        <span>index.htmlを選択してください</span>
+        <input type="file" accept="text/html" id="file">
+    </label>
+    <div id="edit" class="hide">
+    </div>
+    <div id="save_float">
+        <button id="save">保存する</button>
+        <div>
+            <p>このツールは フリーソフト「棋譜読みちゃん」 向けに作成された非公式なものです。</p>
+            <p><a id="termsOpen">利用規約</a><span class="right">連絡先: <a rel="noopener" target="_blank" href="https://twitter.com/maa123_LQ">Twitter</a></span></p>
+        </div>
+    </div>
+</main>
+<div id="terms" class="hide">
+    <div id="terms_content">
+        <h3>利用規約</h3>
+        <p>本規約は，本ソフトウエアの利用に関わる一切の関係に適用されるものとします。</p>
+        <h4>利用条件</h4>
+        <p>本ソフトウエアは「棋譜読みちゃん」(https://help.kify.rei-yumesaki.net/)の利用規約に反しない範囲でご自由にお使いいただけます</p>
+        <h4>保証の否認および免責事項</h4>
+        <p>
+            開発者は、本ソフトウエアに事実上または法律上の瑕疵（安全性、信頼性、正確性、完全性、有効性、特定の目的への適合性、セキュリティなどに関する欠陥、エラーやバグ、権利侵害などを含みます。）がないことを明示的にも黙示的にも保証しておりません。</p>
+        <p>開発者は、本ソフトウエアに起因して利用者に生じたあらゆる損害について一切の責任を負いません。</p>
+        <button id="termsClose">閉じる</button>
+    </div>
+</div>
+<script src="dist/main.js"></script>
+</body>
+</html>
