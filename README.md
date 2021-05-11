@@ -54,3 +54,7 @@ WEB版は更新が常に反映されるため、特別な理由がなければ�
 「棋譜読みちゃん　ユーザーガイド」に記載されている選択肢番号を超える数字も追加した分だけ利用可能となります。
 
 例えば、上下装飾ラインであれば、１つ新たに追加した場合はgra_player_back_21.pngとなります。
+
+## ダウンロード版
+
+[ダウンロード](https://github.com/maa123/Kify_customizer/archive/refs/heads/master.zip)
