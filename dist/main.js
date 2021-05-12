@@ -7,10 +7,12 @@ const setEditMode = (flag = true) => {
         document.getElementById('file_label').classList.add('hide');
         document.getElementById('dropArea').classList.add('hide');
         document.getElementById('edit').classList.remove('hide');
+        document.getElementById('save').classList.remove('invisible');
     } else {
         document.getElementById('file_label').classList.remove('hide');
         document.getElementById('dropArea').classList.remove('hide');
         document.getElementById('edit').classList.add('hide');
+        document.getElementById('save').classList.add('invisible');
     }
 }
 
