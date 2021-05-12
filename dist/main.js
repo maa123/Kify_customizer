@@ -114,7 +114,9 @@ class Editor {
             for (let i = 0; i < newCount; i++) {
                 const newItem = item[0].children[1].children[i].children[0];
                 if (baseCount <= i) {
-                    item[1].appendChild(this.createNewOption(newItem.value, newItem.dataset.optionValue));
+                    const _opt = this.createNewOption(newItem.value, newItem.dataset.optionValue);
+                    _opt.dataset.customizerElement = "true";
+                    item[1].appendChild(_opt);
                 }
                 item[1].children[i].textContent = newItem.value;
             }
