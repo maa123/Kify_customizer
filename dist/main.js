@@ -40,6 +40,45 @@ class Editor {
         }
     }
 
+    _checkNumberedLabel(text) {
+        return text.indexOf("：") !== -1;
+    }
+
+    _replaceNumberedLabel(text) {
+        if(this._checkNumberedLabel(text)){
+            const arr = text.split("：");
+            if(arr[0].match(/^\d+$/)) {
+                arr[0] = `${Number(arr[0]) - 1}`;
+            }
+            return arr.join("：");
+        }
+        return text;
+    }
+
+    removeOption(_ul, _li) {
+        let f = false;
+        let labelNumber = false;
+        const list = _ul.children;
+        for (let i = 0; i < list.length; i++) {
+            if (f) {
+                const item = list[i].firstChild;
+                item.dataset.optionValue = list[i - 1].firstChild.dataset.optionValue;
+                item.dataset.id = list[i - 1].firstChild.dataset.id;
+                if(labelNumber) {
+                    item.value = this._replaceNumberedLabel(item.value);
+                    if(item.dataset.append) {
+                        item.dataset.defaultValue = this._replaceNumberedLabel(item.dataset.defaultValue);
+                    }
+                }
+            }
+            if (list[i] === _li) {
+                f = true;
+                labelNumber = this._checkNumberedLabel(_li.firstChild.value);
+            }
+        }
+        _ul.removeChild(_li);
+    }
+
     listEditor(element, targetElement) {
         targetElement.innerHTML = "";
         const list = element.children;
@@ -60,7 +99,7 @@ class Editor {
                 const _delbutton = document.createElement('button');
                 _delbutton.innerHTML = icon_trash;
                 _delbutton.onclick = () => {
-                    _li.parentElement.removeChild(_li);
+                    this.removeOption(_li.parentElement, _li);
                 }
                 _delbutton.classList.add('delButton');
                 _li.appendChild(_delbutton);
@@ -72,10 +111,10 @@ class Editor {
 
     appendNewInput(ul) {
         const cl = ul.lastChild.firstChild;
-        const si = cl.dataset.defaultValue.indexOf("：");
+        const si = cl.value.indexOf("：");
         let val = "";
         if (si !== -1) {
-            const num = Number(cl.dataset.defaultValue.slice(0, si));
+            const num = Number(cl.value.slice(0, si));
             val = `${num + 1}：`;
         }
         const _li = document.createElement('li');
@@ -85,11 +124,12 @@ class Editor {
         _input.dataset.id = Number(cl.dataset.id) + 1;
         _input.dataset.optionValue = Number(cl.dataset.optionValue) + 1;
         _input.dataset.canDelete = "true";
+        _input.dataset.append = "true";
         const _delbutton = document.createElement('button');
         _delbutton.innerHTML = icon_trash;
         _delbutton.classList.add('delButton');
         _delbutton.onclick = () => {
-            _li.parentElement.removeChild(_li);
+            this.removeOption(ul, _li);
         }
         _input.value = val;
         _input.onchange = _input.onkeyup = this.handleChange;
