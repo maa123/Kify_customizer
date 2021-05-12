@@ -1,5 +1,15 @@
 const editableList = ["set1", "set2", "set11", "set5", "set14", "set9", "set8", "set16", "set13", "set12", "set6", "set7", "set17"];
 
+const setEditMode = (flag = true) => {
+    if(flag) {
+        document.getElementById('file_label').classList.add('hide');
+        document.getElementById('save').classList.remove('hide');
+    } else {
+        document.getElementById('file_label').classList.remove('hide');
+        document.getElementById('save').classList.add('hide');
+    }
+}
+
 class Editor {
     constructor(element, doc) {
         this.element = element;
@@ -138,7 +148,7 @@ const htmlEditor = (text) => {
     const doc = domparser.parseFromString(text, "text/html");
     if (doc.title !== "棋譜読みちゃん") {
         alert("棋譜読みちゃんのindex.htmlを選択してください");
-        document.getElementById('file_label').classList.remove('hide');
+        setEditMode(false);
         return;
     }
     document.getElementById('edit').classList.remove('hide');
@@ -158,7 +168,7 @@ document.addEventListener('DOMContentLoaded', _ => {
     fileE.addEventListener('change', _ => {
         const reader = new FileReader();
         reader.onload = _ => {
-            document.getElementById('file_label').classList.add('hide');
+            setEditMode();
             htmlEditor(reader.result);
         }
         reader.readAsText(fileE.files[0]);
