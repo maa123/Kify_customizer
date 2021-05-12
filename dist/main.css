@@ -1,9 +1,25 @@
+body {
+    margin: 0;
+}
+
 .hide {
     display: none;
 }
 
-.edited {
+main {
+    padding: 1.5em;
+}
+
+.editContainer{
+    margin-right: 2rem;
+}
+
+input[type=text].edited {
     border-color: red;
+}
+
+input[data-can-delete=true] {
+    width: calc(100% - 24.5px);
 }
 
 #file_label {
@@ -23,6 +39,7 @@
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 10rem;
+    justify-content: center;
 }
 
 #save_float {
@@ -30,22 +47,25 @@
     left: 0;
     bottom: 0;
     padding-bottom: 1em;
+    padding-top: 1em;
     width: 100vw;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     background-color: rgba(240, 240, 240, .9);
 }
 
 ul {
     margin-bottom: 0;
+    list-style-type: none;
+}
+
+li {
+    position: relative;
 }
 
 .addButton {
-    padding: .2rem;
-    float: right;
-    margin-top: 0;
-    margin-right: 25%;
-    width: 40%;
+    margin-left: 3.2rem;
 }
 
 #terms {
@@ -82,4 +102,44 @@ ul {
 
 #usage_link {
     padding-left: 1em;
+}
+
+.delButton {
+    position: absolute;
+    padding-left: 3px;
+    padding-right: 3px;
+    right: 0;
+}
+
+.delButton svg {
+    display: inherit;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+#dropArea{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: -10;
+    transition: background-color 300ms;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+#dropArea.hide {
+    display: none;
+}
+
+#dropArea p {
+    font-size: 4em;
+    width: 100%;
+    user-select: none;
+}
+
+#dropArea.hover {
+    background-color: #118bee;
+    opacity: .4;
 }
