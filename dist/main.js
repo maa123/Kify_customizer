@@ -2,14 +2,16 @@ const editableList = ["set1", "set2", "set11", "set5", "set14", "set9", "set8", 
 
 const icon_trash = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7,4 L7,3 C7,1.8954305 7.8954305,1 9,1 L15,1 C16.1045695,1 17,1.8954305 17,3 L17,4 L20,4 C21.1045695,4 22,4.8954305 22,6 L22,8 C22,9.1045695 21.1045695,10 20,10 L19.9198662,10 L19,21 C19,22.1045695 18.1045695,23 17,23 L7,23 C5.8954305,23 5,22.1045695 5.00345424,21.0830455 L4.07986712,10 L4,10 C2.8954305,10 2,9.1045695 2,8 L2,6 C2,4.8954305 2.8954305,4 4,4 L7,4 Z M7,6 L4,6 L4,8 L20,8 L20,6 L17,6 L7,6 Z M6.08648886,10 L7,21 L17,21 L17.0034542,20.9169545 L17.9132005,10 L6.08648886,10 Z M15,4 L15,3 L9,3 L9,4 L15,4 Z"/></svg>`;
 
-const hideFileSelect = () => {
-    document.getElementById('file_label').classList.add('hide');
-    document.getElementById('dropArea').classList.add('hide');
-}
-
-const showFileSelect = () => {
-    document.getElementById('file_label').classList.remove('hide');
-    document.getElementById('dropArea').classList.remove('hide');
+const setEditMode = (flag = true) => {
+    if (flag) {
+        document.getElementById('file_label').classList.add('hide');
+        document.getElementById('dropArea').classList.add('hide');
+        document.getElementById('edit').classList.remove('hide');
+    } else {
+        document.getElementById('file_label').classList.remove('hide');
+        document.getElementById('dropArea').classList.remove('hide');
+        document.getElementById('edit').classList.add('hide');
+    }
 }
 
 class Editor {
@@ -51,7 +53,7 @@ class Editor {
             _input.onchange = _input.onkeyup = this.handleChange;
             _input.onfocus = this.handleFocus;
             _li.appendChild(_input);
-            if(list[i].dataset.customizerElement) {
+            if (list[i].dataset.customizerElement) {
                 _input.dataset.canDelete = "true";
                 const _delbutton = document.createElement('button');
                 _delbutton.innerHTML = icon_trash;
@@ -164,10 +166,9 @@ const htmlEditor = (text) => {
     const doc = domparser.parseFromString(text, "text/html");
     if (doc.title !== "棋譜読みちゃん") {
         alert("棋譜読みちゃんのindex.htmlを選択してください");
-        showFileSelect();
         return;
     }
-    document.getElementById('edit').classList.remove('hide');
+    setEditMode();
     const editor = new Editor(document.getElementById('edit'), doc);
     for (let k_id of editableList) {
         editor.addEditor(k_id);
@@ -184,7 +185,6 @@ document.addEventListener('DOMContentLoaded', _ => {
     fileE.addEventListener('change', _ => {
         const reader = new FileReader();
         reader.onload = _ => {
-            hideFileSelect();
             htmlEditor(reader.result);
         }
         reader.readAsText(fileE.files[0]);
@@ -216,15 +216,13 @@ document.addEventListener('DOMContentLoaded', _ => {
     dropArea.ondrop = e => {
         e.preventDefault();
         dropArea.classList.remove("hover");
-        if(e.dataTransfer.items) {
-            if(e.dataTransfer.items[0].kind === 'file') {
-                if(e.dataTransfer.items[0].type !== "text/html") {
+        if (e.dataTransfer.items) {
+            if (e.dataTransfer.items[0].kind === 'file') {
+                if (e.dataTransfer.items[0].type !== "text/html") {
                     return false;
                 }
-                hideFileSelect();
                 const reader = new FileReader();
                 reader.onload = _ => {
-                    hideFileSelect();
                     htmlEditor(reader.result);
                 }
                 reader.readAsText(e.dataTransfer.items[0].getAsFile());
@@ -232,7 +230,6 @@ document.addEventListener('DOMContentLoaded', _ => {
         } else {
             const reader = new FileReader();
             reader.onload = _ => {
-                hideFileSelect();
                 htmlEditor(reader.result);
             }
             reader.readAsText(e.dataTransfer.files[0]);
