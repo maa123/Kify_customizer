@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
     <title>棋譜読みちゃんのオプション編集</title>
-    <link rel="stylesheet" href="dist/mvp.css">
+    <link rel="stylesheet" href="dist/skeleton.css">
     <link rel="stylesheet" href="dist/main.css">
 </head>
 <body>
+<div id="dropArea">
+    <p>ファイルをドロップしてください</p>
+</div>
 <main>
     <label id="file_label">
         <span>index.htmlを選択してください</span>
@@ -16,7 +19,7 @@
     <div id="edit" class="hide">
     </div>
     <div id="save_float">
-        <button id="save" class="hide">保存する</button>
+        <button id="save" class="button-primary invisible">保存する</button>
         <div>
             <p>このツールは フリーソフト「棋譜読みちゃん」 向けに作成された非公式なものです。</p>
             <p><a id="termsOpen">利用規約</a>
