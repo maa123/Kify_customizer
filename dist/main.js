@@ -59,6 +59,9 @@ class Editor {
                 _input.dataset.canDelete = "true";
                 const _delbutton = document.createElement('button');
                 _delbutton.innerHTML = icon_trash;
+                _delbutton.onclick = () => {
+                    _li.parentElement.removeChild(_li);
+                }
                 _delbutton.classList.add('delButton');
                 _li.appendChild(_delbutton);
             }
@@ -85,6 +88,9 @@ class Editor {
         const _delbutton = document.createElement('button');
         _delbutton.innerHTML = icon_trash;
         _delbutton.classList.add('delButton');
+        _delbutton.onclick = () => {
+            _li.parentElement.removeChild(_li);
+        }
         _input.value = val;
         _input.onchange = _input.onkeyup = this.handleChange;
         _input.onfocus = this.handleFocus;
@@ -141,7 +147,11 @@ class Editor {
         for (let item of this.edits) {
             const baseCount = item[1].children.length;
             const newCount = item[0].children[1].children.length;
-            for (let i = 0; i < newCount; i++) {
+            for (let i = 0; i < Math.max(newCount, baseCount); i++) {
+                if (newCount <= i) {
+                    item[1].removeChild(item[1].children[i]);
+                    continue;
+                }
                 const newItem = item[0].children[1].children[i].children[0];
                 if (baseCount <= i) {
                     const _opt = this.createNewOption(newItem.value, newItem.dataset.optionValue);
