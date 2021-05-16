@@ -22,6 +22,10 @@ WEB版はURLが変更される可能性がありますので、リンクを貼�
 
 WEB版は更新が常に反映されるため、特別な理由がなければダウンロード版ではなくWEB版を利用することを強くおすすめします。
 
+## 使い方 (WEB版) (動画)
+
+[![動画](https://img.youtube.com/vi/Z2fcc3IMHUM/default.jpg)](https://youtu.be/Z2fcc3IMHUM)
+
 ## 使い方 (WEB版)
 
 1. [https://kify-customizer.vercel.app/](https://kify-customizer.vercel.app/) を開きます。
